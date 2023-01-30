@@ -28,13 +28,13 @@ public class Shop {
       invoices.add(invoice);
    }
    
-   public double getTotalAmount() {
-      double total = 0;
-      for (Invoice invoice : invoices) {
-         total += invoice.getInvoiceAmount();
-      }
-      return total;
-   }
+//   public double getTotalAmount() {
+//      double total = 0;
+//      for (Invoice invoice : invoices) {
+//         total += invoice.getInvoiceAmount();
+//      }
+//      return total;
+//   }
    
    public String getName() {
       return name;
