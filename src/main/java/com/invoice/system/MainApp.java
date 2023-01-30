@@ -52,7 +52,7 @@ public class MainApp {
 			System.out.print("Enter a valid option (1-8): ");
 
 			try {
-				choice =userInput.nextInt();
+				choice =Integer.parseInt(userInput.nextLine());
 				switch (choice) {
 				case 1:
 					// Perform action for Shop Settings
@@ -86,9 +86,8 @@ public class MainApp {
 					System.out.println("exit selected");
 
 				}
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid input. Please enter a number.");
-				userInput.next();
+			} catch (Exception e) {
+				System.out.println("Invalid input. Please choose a number.");
 			}
 		}
 	}
