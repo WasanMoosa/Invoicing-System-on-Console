@@ -16,7 +16,8 @@ public class MainApp {
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
-		// Initialize menu items
+
+		// Initialize Top-level menu items
 		MenuItem shopSettingItem = new MenuItem(1, "Shop Settings");
 		MenuItem manageItem = new MenuItem(2, "Manage Shop Items");
 		MenuItem createInvoiceItem = new MenuItem(3, "Create New Invoice");
@@ -26,10 +27,23 @@ public class MainApp {
 		MenuItem programStatisticsItem = new MenuItem(7, "Program Statistics");
 		MenuItem exitItem = new MenuItem(8, "Exit");
 
+		// Initialize Sub-menu items for shopSettingItem
+		MenuItem loadDataItem = new MenuItem(1, "Load Data");
+		MenuItem shopNameItem = new MenuItem(2, "Set Shop Name");
+		MenuItem invoiceHeaderItem = new MenuItem(3, "Set Invoice Header ");
+		MenuItem backItem = new MenuItem(4, "Go Back");
+
+		// Initialize Sub-menu items for manageItem
+		MenuItem addItem = new MenuItem(1, " Add Items");
+		MenuItem deleteItem = new MenuItem(2, "Delete Items");
+		MenuItem changePrice = new MenuItem(3, "Change Item Price");
+		MenuItem reportAllItems = new MenuItem(4, "Report All Items");
+		MenuItem goBack = new MenuItem(5, "Go Back");
+
 		// Initialize the menu
 		Menu invoiceMenu = new Menu("This is  groceries shop menu \nSelect from the following", shopSettingItem);
 
-		// Add menu items to the menu
+		// Add menu items to the Top-level menu
 		invoiceMenu.addMenuItem(manageItem);
 		invoiceMenu.addMenuItem(createInvoiceItem);
 		invoiceMenu.addMenuItem(reportShopItem);
@@ -52,7 +66,7 @@ public class MainApp {
 			System.out.print("Enter a valid option (1-8): ");
 
 			try {
-				choice =Integer.parseInt(userInput.nextLine());
+				choice = Integer.parseInt(userInput.nextLine());
 				switch (choice) {
 				case 1:
 					// Perform action for Shop Settings
