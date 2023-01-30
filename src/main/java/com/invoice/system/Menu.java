@@ -49,9 +49,9 @@ public class Menu {
 	}
 
 	/**
-	 * Prints out the menu
+	 * show the menu
 	 */
-	public void printMenu() {
+	public void showMenu() {
 
 		for (MenuItem items : menuItems) {
 			System.out.println(items.getId() + ": " + items.getTitle());
