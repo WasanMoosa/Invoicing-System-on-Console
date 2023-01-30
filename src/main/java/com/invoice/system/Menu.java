@@ -49,12 +49,22 @@ public class Menu {
 	}
 
 	/**
-	 * show the menu
+	 * show the Top-level menu
 	 */
 	public void showMenu() {
 
 		for (MenuItem items : menuItems) {
 			System.out.println(items.getId() + ": " + items.getTitle());
+		}
+
+	}
+	/**
+	 * show the sub-menu if exist
+	 */
+	public void showSubMenu() {
+
+		for (MenuItem items :menuItems) {
+			System.out.println("    "+items.getId() + ": " + items.getTitle());
 		}
 
 	}

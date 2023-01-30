@@ -14,7 +14,7 @@ public class MenuItem {
 	// Title of the menu item
 	private String title;
 	// Reference to the sub-menu, if it exists
-	Menu menu = null;
+//	public Menu menu = null;
 
 	/**
 	 * Constructor for creating a menu item
@@ -32,9 +32,9 @@ public class MenuItem {
 	 * 
 	 * @return true if the menu item has a sub-menu, false otherwise
 	 */
-	public boolean isSubMenu() {
-		return menu != null;
-	}
+//	public boolean isSubMenu() {
+//		return menu != null;
+//	}
 
 	/**
 	 * Get the id of the menu item
@@ -57,12 +57,12 @@ public class MenuItem {
 	/**
 	 * Assign a sub menu to the item
 	 * 
-	 * @param menu the menu  to be assigned
+	 * @param menu the menu to be assigned
 	 */
-	public void AssignSubMenu(Menu menu) {
-		this.menu = menu;
-
-	}
+//	public void AssignSubMenu(Menu menu) {
+//		this.menu = menu;
+//
+//	}
 
 
 }
