@@ -23,68 +23,125 @@ public class Shop {
 	private ArrayList<Product> products = new ArrayList<>();
 	HashMap<String, String> shopDetails = new HashMap<>();
 
+	/**
+	 * Setter method to update the shop details
+	 * 
+	 * @param shopDetails the new shop details
+	 */
 	public void setShopDetails(HashMap<String, String> shopDetails) {
 		this.shopDetails = shopDetails;
 	}
 
+	/**
+	 * Constructor method to initialize the name and telephone number of the shop
+	 * 
+	 * @param name         the name of the shop
+	 * @param telephoneNumber the telephone number of the shop
+	 */
 	public Shop(String name, String telephoneNumber) {
 		this.name = name;
 		this.telephoneNumber = telephoneNumber;
 	}
 
+	/**
+	 * Method to add an invoice to the list
+	 * 
+	 * @param invoice the invoice to add to the list
+	 */
 	public void addInvoice(Invoice invoice) {
 		invoices.add(invoice);
 	}
 
-	// public double getTotalAmount() {
-	// double total = 0;
-	// for (Invoice invoice : invoices) {
-	// total += invoice.getInvoiceAmount();
-	// }
-	// return total;
-	// }
-
+	/**
+	 * Getter method to return the name of the shop
+	 * 
+	 * @return the name of the shop
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Setter method to update the name of the shop
+	 * 
+	 * @param name the new name of the shop
+	 */
 	public void setName(String name) {
 		this.name = name;
 
 	}
 
+	/**
+	 * Getter method to return the telephone number of the shop
+	 * 
+	 * @return the telephone number of the shop
+	 */
 	public String getTelephoneNumber() {
 		return telephoneNumber;
 	}
 
+	/**
+	 * Setter method to update the telephone number of the shop
+	 * 
+	 * @param telephoneNumber the new telephone number of the shop
+	 */
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
 	}
 
+	/**
+	 * Getter method to return the fax number of the shop
+	 * 
+	 * @return the fax number of the shop
+	 */
 	public String getFax() {
 		return fax;
 	}
 
+	/**
+	 * Setter method to update the fax number of the shop
+	 * 
+	 * @param fax the new fax number of the shop
+	 */
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
 
+	/**
+	 * Getter method to return the email of the shop
+	 * 
+	 * @return the email of the shop
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Setter method to update the email of the shop
+	 * 
+	 * @param email the new email of the shop
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Getter method to return the website of the shop
+	 * 
+	 * @return the website of the shop
+	 */
 	public String getWebsite() {
 		return website;
 	}
 
+	/**
+	 * Setter method to update the website of the shop
+	 * 
+	 * @param website the new website of the shop
+	 */
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-
 	/**
 	 * Getter method to return the list of products
 	 * 
