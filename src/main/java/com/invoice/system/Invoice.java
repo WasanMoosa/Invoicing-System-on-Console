@@ -3,6 +3,7 @@
  */
 package com.invoice.system;
 
+import java.util.ArrayList;
 /**
  * @author Wasan
  *
@@ -16,6 +17,7 @@ public class Invoice {
   private int noOfItems;
   private double total;
   private double balance;
+  private ArrayList<Product> products;
 
   public Invoice(String invoiceNo, Date invoiceDate, String customerName, int noOfItems, double total, double balance) {
     this.invoiceNo = invoiceNo;

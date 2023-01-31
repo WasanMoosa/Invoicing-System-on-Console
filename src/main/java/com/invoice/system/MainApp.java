@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -290,8 +292,13 @@ public class MainApp {
 					//Increase number of clicks 
 					numberOfClick.put("clickCreateInvoice",numberOfClick.get("clickCreateInvoice")+1);
 					putInFileProgDetail(numberOfClick);
+					//Set the date 
+					Calendar calendar = Calendar.getInstance();
+					Date date = calendar.getTime();
 					// Perform action for Create New Invoice
-					System.out.println("Create New Invoice selected.");
+					System.out.println("Here you can create new invoice.");
+					Invoice invoice = new Invoice("1", date, "wasan", 10, 100, 10);
+					
 					break;
 				case 4:
 					//Increase number of clicks 
