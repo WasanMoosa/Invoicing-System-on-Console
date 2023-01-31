@@ -60,8 +60,8 @@ public class MainApp {
 				choice = Integer.parseInt(userInput.nextLine());
 				switch (choice) {
 				case 1:
-					//Increase number of clicks 
-					numberOfClick.put("clickShopSetting",numberOfClick.get("clickShopSetting")+1);
+					// Increase number of clicks
+					numberOfClick.put("clickShopSetting", numberOfClick.get("clickShopSetting") + 1);
 					putInFileProgDetail(numberOfClick);
 					// Calling Sub Menu
 					SubMenuShop subMenuShop = new SubMenuShop();
@@ -143,8 +143,8 @@ public class MainApp {
 
 					break;
 				case 2:
-					//Increase number of clicks 
-					numberOfClick.put("clickManageShop",numberOfClick.get("clickManageShop")+1);
+					// Increase number of clicks
+					numberOfClick.put("clickManageShop", numberOfClick.get("clickManageShop") + 1);
 					putInFileProgDetail(numberOfClick);
 					// Calling Sub Menu
 					SubMenuManage subMenuManage = new SubMenuManage();
@@ -176,8 +176,8 @@ public class MainApp {
 										System.out.print("Item price:");
 										Double itemPrice = Double.parseDouble(userInput.nextLine());
 										System.out.print("Item quantity:");
-										int quantity =Integer.parseInt(userInput.nextLine());
-										Product product = new Product(itemId, itemName, itemPrice, quantity );
+										int quantity = Integer.parseInt(userInput.nextLine());
+										Product product = new Product(itemId, itemName, itemPrice, quantity);
 										groceryShop.addProduct(product);
 										putInFileProduct(groceryShop.getProducts());
 										currectDetails = true;
@@ -292,47 +292,78 @@ public class MainApp {
 
 					break;
 				case 3:
-					//Increase number of clicks 
-					numberOfClick.put("clickCreateInvoice",numberOfClick.get("clickCreateInvoice")+1);
+					// Increase number of clicks
+					numberOfClick.put("clickCreateInvoice", numberOfClick.get("clickCreateInvoice") + 1);
 					putInFileProgDetail(numberOfClick);
-					//Set the date 
-					Calendar calendar = Calendar.getInstance();
-					Date date = calendar.getTime();
-					// Perform action for Create New Invoice
-					System.out.println("Here you can create new invoice.");
-					Invoice invoice = new Invoice("1", date, "wasan", 10, 100, 10);
-					
+//					// Set the date
+//					Calendar calendar = Calendar.getInstance();
+//					Date date = calendar.getTime();
+//					// Perform action for Create New Invoice
+//					System.out.println("Here you can create new invoice.");
+//					/////////////////////////////////////////////////////////////
+//					try {
+//						groceryShop.setProducts(loadProductFile(groceryShop));
+//					} catch (Exception e) {
+//						// TODO: handle exception
+//					}
+//					System.out.println("The items you have are:");
+//					System.out.println("ID         Name");
+//					System.out.println("-------------------");
+//					for (Product ii : groceryShop.getProducts()) {
+//						System.out.println(ii.getId() + "        " + ii.getName());
+//					}
+//					Boolean checkCorrectID = false;
+//					while (!checkCorrectID) {
+//						try {
+//							System.out.println("Select the item you buy by writing its id");
+//							int id = Integer.parseInt(userInput.nextLine());
+//							///////
+//							for (int i = 0; i < groceryShop.getProducts().size(); i++) {
+//								if (groceryShop.getProducts().get(i).getId() == id) {
+//									checkCorrectID = true;
+//									groceryShop.shopDetails = loadShopDetails("shop details.json");
+//									Invoice invoice = new Invoice(groceryShop.shopDetails,"1", date, "wasan", 10, 100, 10);
+//								}
+//							}
+//							///////
+//
+//						} catch (Exception e) {
+//							System.out.println("Invalid id");
+//							checkCorrectID = false;
+//						}
+//
+//					}
+
 					break;
 				case 4:
-					//Increase number of clicks 
-					numberOfClick.put("clickReportStatic",numberOfClick.get("clickReportStatic")+1);
+					// Increase number of clicks
+					numberOfClick.put("clickReportStatic", numberOfClick.get("clickReportStatic") + 1);
 					putInFileProgDetail(numberOfClick);
 					// Perform action for Report: Statistics
 					System.out.println("Report: Statistics selected.");
 					break;
 				case 5:
-					//Increase number of clicks 
-					numberOfClick.put("clickReportInvoice",numberOfClick.get("clickReportInvoice")+1);
+					// Increase number of clicks
+					numberOfClick.put("clickReportInvoice", numberOfClick.get("clickReportInvoice") + 1);
 					putInFileProgDetail(numberOfClick);
 					// Perform action for Report: All Invoices
 					System.out.println("Report: All Invoices selected.");
 					break;
 				case 6:
-					//Increase number of clicks 
-					numberOfClick.put("clickSearchInvoice",numberOfClick.get("clickSearchInvoice")+1);
+					// Increase number of clicks
+					numberOfClick.put("clickSearchInvoice", numberOfClick.get("clickSearchInvoice") + 1);
 					putInFileProgDetail(numberOfClick);
 					// Perform action for Search (1) Invoice
 					System.out.println("Search (1) Invoice selected");
 				case 7:
-					//Increase number of clicks 
-					numberOfClick.put("clickProgramStatic",numberOfClick.get("clickProgramStatic")+1);
+					// Increase number of clicks
+					numberOfClick.put("clickProgramStatic", numberOfClick.get("clickProgramStatic") + 1);
 					putInFileProgDetail(numberOfClick);
 					System.out.println("Program Statistics:");
-		            //Printing HashMap of number of click
-				
-						System.out.print(numberOfClick);
-				
-					
+					// Printing HashMap of number of click
+
+					System.out.print(numberOfClick);
+
 					break;
 				case 8:
 					// Perform action for exit
@@ -352,6 +383,7 @@ public class MainApp {
 				}
 			} catch (Exception e) {
 				System.out.println("Invalid input. Please choose a number.");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -401,12 +433,12 @@ public class MainApp {
 		}
 
 	}
-	
-/**
- * 
- * @param shop File to be update it
- * @return ArrayList 
- */
+
+	/**
+	 * 
+	 * @param shop File to be update it
+	 * @return ArrayList
+	 */
 	public static ArrayList<Product> loadProductFile(Shop shop) {
 		File myFile = new File("product.json");
 		ArrayList<Product> list = new ArrayList<>();
@@ -476,6 +508,30 @@ public class MainApp {
 			}
 		}
 		return numberOfClick;
+
+	}
+
+	public static HashMap<String, String> loadShopDetails(String fileName) {
+		File myFile = new File(fileName);
+		HashMap<String, String> shopDetails = new HashMap<>();
+		if (myFile.exists()) {
+			Gson gson = new Gson();
+			Scanner scanFile;
+			try {
+				scanFile = new Scanner(myFile);
+				String st;
+				st = scanFile.nextLine();
+				Type listType = new TypeToken<HashMap<String, String>>() {
+				}.getType();
+				shopDetails = gson.fromJson(st, listType);
+
+			} catch (FileNotFoundException e) {
+
+			}
+		} else {
+			System.out.print("The details not exist, First Set the details from (shop Setting)");
+		}
+		return shopDetails;
 
 	}
 }

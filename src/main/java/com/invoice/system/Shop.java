@@ -19,9 +19,9 @@ public class Shop {
 	private String fax = " ";
 	private String email = " ";
 	private String website = " ";
-	private ArrayList<Invoice> invoices = new ArrayList<>();
-	private ArrayList<Product> products = new ArrayList<>();
-	HashMap<String, String> shopDetails = new HashMap<>();
+	private ArrayList<Invoice> invoices= new ArrayList<>();
+	private ArrayList<Product> products= new ArrayList<>();
+	HashMap<String, String> shopDetails= new HashMap<>();
 
 	/**
 	 * Setter method to update the shop details
