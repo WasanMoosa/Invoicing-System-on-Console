@@ -65,6 +65,7 @@ public class MainApp {
 							secondChoice = Integer.parseInt(userInput.nextLine());
 							switch (secondChoice) {
 							case 1:
+								// TODO invoice reports
 								System.out.println("The items you have in your store are");
 								try {
 									groceryShop.setProducts(loadProductFile(groceryShop));
@@ -220,33 +221,47 @@ public class MainApp {
 								checkCorrectID = false;
 								while (!checkCorrectID) {
 									try {
-										System.out.println("Choose the item you want to change its price by writing the id");
+										System.out.println(
+												"Choose the item you want to change its price by writing the id");
 										int id = Integer.parseInt(userInput.nextLine());
 
-										for ( int i=0; i< groceryShop.getProducts().size(); i++) {
-											if (groceryShop.getProducts().get(i).getId()== id) {
-												System.out.println("The previous price is " + groceryShop.getProducts().get(i).getPrice());
+										for (int i = 0; i < groceryShop.getProducts().size(); i++) {
+											if (groceryShop.getProducts().get(i).getId() == id) {
+												System.out.println("The previous price is "
+														+ groceryShop.getProducts().get(i).getPrice());
 												System.out.println("Enter the new price: ");
 												Double itemPrice = Double.parseDouble(userInput.nextLine());
 												groceryShop.getProducts().get(i).setPrice(itemPrice);
 												checkCorrectID = true;
 											}
-										}		
+										}
 										putInFile2(groceryShop.getProducts());
 										if (!checkCorrectID) {
-										System.out.println("id not exist");}
+											System.out.println("id not exist");
+										}
 
 									} catch (NumberFormatException e) {
 										System.out.println("Invalid id or price");
 										checkCorrectID = false;
 									}
 
-
 								}
 
 								break;
+							// Report all items
 							case 4:
-
+								System.out.println("The items you have in your store are");
+								try {
+									groceryShop.setProducts(loadProductFile(groceryShop));
+									System.out.println("ID         Name");
+									System.out.println("-------------------");
+									for (Product ii : groceryShop.getProducts()) {
+										System.out.println(ii.getId() + "        " + ii.getName());
+									}
+								} catch (Exception e) {
+									System.out.println("The file is empty!");
+								}
+								break;
 							case 5:
 								TopLevelMenu.main(args);
 								choice = 0;
