@@ -175,7 +175,9 @@ public class MainApp {
 										String itemName = userInput.nextLine();
 										System.out.print("Item price:");
 										Double itemPrice = Double.parseDouble(userInput.nextLine());
-										Product product = new Product(itemId, itemName, itemPrice);
+										System.out.print("Item quantity:");
+										int quantity =Integer.parseInt(userInput.nextLine());
+										Product product = new Product(itemId, itemName, itemPrice, quantity );
 										groceryShop.addProduct(product);
 										putInFileProduct(groceryShop.getProducts());
 										currectDetails = true;
@@ -185,6 +187,7 @@ public class MainApp {
 										System.out.println("id should be integer number");
 										System.out.println("Name can be anything you like");
 										System.out.println("Price has to be number\n");
+										System.out.println("quantity should be integer number");
 									}
 								}
 								break;
