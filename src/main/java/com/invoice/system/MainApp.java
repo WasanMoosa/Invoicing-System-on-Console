@@ -317,8 +317,12 @@ public class MainApp {
 					//Increase number of clicks 
 					numberOfClick.put("clickProgramStatic",numberOfClick.get("clickProgramStatic")+1);
 					putInFileProgDetail(numberOfClick);
-					// Perform action for Program Statistics
-					System.out.println("Program Statistics selected.");
+					System.out.println("Program Statistics:");
+		            //Printing HashMap of number of click
+				
+						System.out.print(numberOfClick);
+				
+					
 					break;
 				case 8:
 					// Perform action for exit
