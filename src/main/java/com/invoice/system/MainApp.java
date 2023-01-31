@@ -27,6 +27,11 @@ public class MainApp {
 	 */
 	public static void main(String[] args) {
 
+		// TODO upload static clicks
+		////////////////////////////
+		HashMap<String, Integer> numberOfClick = new HashMap<>();
+		numberOfClick = loadProgDetails("program details.json");
+
 		// Calling Top Level Menu
 		TopLevelMenu topLevelMenu = new TopLevelMenu();
 		TopLevelMenu.main(args);
@@ -43,7 +48,7 @@ public class MainApp {
 		groceryShop.shopDetails.put("fax", groceryShop.getFax());
 		groceryShop.shopDetails.put("email", groceryShop.getEmail());
 		groceryShop.shopDetails.put("website", groceryShop.getWebsite());
-		putInFile(groceryShop.shopDetails);
+		putInFileShoDetail(groceryShop.shopDetails);
 
 		// Switch case for user input
 		while (choice < 1 || choice > 8) {
@@ -53,6 +58,9 @@ public class MainApp {
 				choice = Integer.parseInt(userInput.nextLine());
 				switch (choice) {
 				case 1:
+					//Increase number of clicks 
+					numberOfClick.put("clickShopSetting",numberOfClick.get("clickShopSetting")+1);
+					putInFileProgDetail(numberOfClick);
 					// Calling Sub Menu
 					SubMenuShop subMenuShop = new SubMenuShop();
 					subMenuShop.main(args);
@@ -92,7 +100,7 @@ public class MainApp {
 										String shopName = userInput.nextLine();
 										groceryShop.setName(shopName);
 										groceryShop.shopDetails.put("name", groceryShop.getName());
-										putInFile(groceryShop.shopDetails);
+										putInFileShoDetail(groceryShop.shopDetails);
 									} else if (changeName.equals("n") || changeName.equals("N")) {
 										// return to sub menu
 										subMenuShop.main(args);
@@ -117,7 +125,7 @@ public class MainApp {
 								System.out.print("Set Website: ");
 								groceryShop.setWebsite(userInput.nextLine());
 								groceryShop.shopDetails.put("website", groceryShop.getWebsite());
-								putInFile(groceryShop.shopDetails);
+								putInFileShoDetail(groceryShop.shopDetails);
 
 								break;
 							case 4:
@@ -133,6 +141,9 @@ public class MainApp {
 
 					break;
 				case 2:
+					//Increase number of clicks 
+					numberOfClick.put("clickManageShop",numberOfClick.get("clickManageShop")+1);
+					putInFileProgDetail(numberOfClick);
 					// Calling Sub Menu
 					SubMenuManage subMenuManage = new SubMenuManage();
 					subMenuManage.main(args);
@@ -164,7 +175,7 @@ public class MainApp {
 										Double itemPrice = Double.parseDouble(userInput.nextLine());
 										Product product = new Product(itemId, itemName, itemPrice);
 										groceryShop.addProduct(product);
-										putInFile2(groceryShop.getProducts());
+										putInFileProduct(groceryShop.getProducts());
 										currectDetails = true;
 
 									} catch (Exception e) {
@@ -194,7 +205,7 @@ public class MainApp {
 										System.out.println("Choose what you want to delet by writing id");
 										int id = Integer.parseInt(userInput.nextLine());
 										checkCorrectID = groceryShop.deleteProduct(id, checkCorrectID);
-										putInFile2(groceryShop.getProducts());
+										putInFileProduct(groceryShop.getProducts());
 
 									} catch (Exception e) {
 										System.out.println("Invalid id");
@@ -235,7 +246,7 @@ public class MainApp {
 												checkCorrectID = true;
 											}
 										}
-										putInFile2(groceryShop.getProducts());
+										putInFileProduct(groceryShop.getProducts());
 										if (!checkCorrectID) {
 											System.out.println("id not exist");
 										}
@@ -276,21 +287,36 @@ public class MainApp {
 
 					break;
 				case 3:
+					//Increase number of clicks 
+					numberOfClick.put("clickCreateInvoice",numberOfClick.get("clickCreateInvoice")+1);
+					putInFileProgDetail(numberOfClick);
 					// Perform action for Create New Invoice
 					System.out.println("Create New Invoice selected.");
 					break;
 				case 4:
+					//Increase number of clicks 
+					numberOfClick.put("clickReportStatic",numberOfClick.get("clickReportStatic")+1);
+					putInFileProgDetail(numberOfClick);
 					// Perform action for Report: Statistics
 					System.out.println("Report: Statistics selected.");
 					break;
 				case 5:
+					//Increase number of clicks 
+					numberOfClick.put("clickReportInvoice",numberOfClick.get("clickReportInvoice")+1);
+					putInFileProgDetail(numberOfClick);
 					// Perform action for Report: All Invoices
 					System.out.println("Report: All Invoices selected.");
 					break;
 				case 6:
+					//Increase number of clicks 
+					numberOfClick.put("clickSearchInvoice",numberOfClick.get("clickSearchInvoice")+1);
+					putInFileProgDetail(numberOfClick);
 					// Perform action for Search (1) Invoice
 					System.out.println("Search (1) Invoice selected");
 				case 7:
+					//Increase number of clicks 
+					numberOfClick.put("clickProgramStatic",numberOfClick.get("clickProgramStatic")+1);
+					putInFileProgDetail(numberOfClick);
 					// Perform action for Program Statistics
 					System.out.println("Program Statistics selected.");
 					break;
@@ -316,8 +342,22 @@ public class MainApp {
 		}
 	}
 
-	public static void putInFile(HashMap<String, String> FileUpload) {
+	public static void putInFileShoDetail(HashMap<String, String> FileUpload) {
 		File myFile = new File("shop details.json");
+		try (FileWriter writer = new FileWriter(myFile)) {
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(FileUpload, writer);
+			writer.write("\n");
+			writer.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+	}
+
+	public static void putInFileProgDetail(HashMap<String, Integer> FileUpload) {
+		File myFile = new File("program details.json");
 		try (FileWriter writer = new FileWriter(myFile)) {
 			Gson gson = new GsonBuilder().create();
 			gson.toJson(FileUpload, writer);
@@ -331,7 +371,7 @@ public class MainApp {
 
 	}
 
-	public static void putInFile2(ArrayList<Product> fileUpload) {
+	public static void putInFileProduct(ArrayList<Product> fileUpload) {
 		File myFile = new File("product.json");
 		try (FileWriter writer = new FileWriter(myFile)) {
 			// for(int i=0; i<fileUpload.size(); i++) {
@@ -378,6 +418,45 @@ public class MainApp {
 			}
 		}
 		return list;
+
+	}
+
+	public static HashMap<String, Integer> loadProgDetails(String fileName) {
+		File myFile = new File(fileName);
+		HashMap<String, Integer> numberOfClick = new HashMap<>();
+		if (myFile.exists()) {
+			Gson gson = new Gson();
+			Scanner scanFile;
+			try {
+				scanFile = new Scanner(myFile);
+				String st;
+				st = scanFile.nextLine();
+				Type listType = new TypeToken<HashMap<String, Integer>>() {
+				}.getType();
+				numberOfClick = gson.fromJson(st, listType);
+
+			} catch (FileNotFoundException e) {
+
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				myFile.createNewFile();
+				numberOfClick.put("clickShopSetting", 0);
+				numberOfClick.put("clickManageShop", 0);
+				numberOfClick.put("clickCreateInvoice", 0);
+				numberOfClick.put("clickReportStatic", 0);
+				numberOfClick.put("clickReportInvoice", 0);
+				numberOfClick.put("clickSearchInvoice", 0);
+				numberOfClick.put("clickProgramStatic", 0);
+				putInFileProgDetail(numberOfClick);
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return numberOfClick;
 
 	}
 }
