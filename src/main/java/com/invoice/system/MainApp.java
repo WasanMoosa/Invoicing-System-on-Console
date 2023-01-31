@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Spliterator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -136,8 +137,12 @@ public class MainApp {
 							secondChoice = Integer.parseInt(userInput.nextLine());
 							switch (secondChoice) {
 							case 1:
-								groceryShop.setProducts(loadProductFile(groceryShop));
-								
+								try {
+									groceryShop.setProducts(loadProductFile(groceryShop));
+								} catch (Exception e) {
+									// TODO: handle exception
+								}
+
 								System.out.println("Enter the item details that you want to add");
 								System.out.print("Item id:");
 								int itemId = Integer.parseInt(userInput.nextLine());
@@ -163,6 +168,7 @@ public class MainApp {
 										System.out.println("Choose what you want to delet by writing id");
 										int id = Integer.parseInt(userInput.nextLine());
 										checkBoolean = groceryShop.deleteProduct(id, checkBoolean);
+										putInFile2(groceryShop.getProducts());
 
 									} catch (Exception e) {
 										System.out.println("Invalid id");
@@ -236,13 +242,15 @@ public class MainApp {
 
 	}
 
-	public static void putInFile2(ArrayList<Product> FileUpload) {
+	public static void putInFile2(ArrayList<Product> fileUpload) {
 		File myFile = new File("product.json");
 		try (FileWriter writer = new FileWriter(myFile)) {
-			Gson gson = new GsonBuilder().create();
-			gson.toJson(FileUpload, writer);
-			writer.write("\n");
+			// for(int i=0; i<fileUpload.size(); i++) {
+			Gson gson = new Gson();
+			String json = gson.toJson(fileUpload);
+			writer.write(json);
 			writer.close();
+			// }
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -256,19 +264,17 @@ public class MainApp {
 		ArrayList<Product> list = new ArrayList<>();
 		ArrayList<Product> products = new ArrayList<>();
 		if (myFile.exists()) {
-			Gson gson = new GsonBuilder().create();
+			Gson gson = new Gson();
 			Scanner scanFile;
 			try {
 				scanFile = new Scanner(myFile);
-				while (scanFile.hasNextLine()) {
-					String st;
-					st = scanFile.nextLine();
-					Type listType = new TypeToken<ArrayList<Product>>() {
-					}.getType();
-					list = gson.fromJson(st, listType);
-					products.add(list.get(0));
+				String st;
+				st = scanFile.nextLine();
+				Type listType = new TypeToken<ArrayList<Product>>() {
+				}.getType();
+				list = gson.fromJson(st, listType);
 
-				}
+				// }
 
 			} catch (FileNotFoundException e) {
 
@@ -282,7 +288,7 @@ public class MainApp {
 				e.printStackTrace();
 			}
 		}
-		return products;
+		return list;
 
 	}
 }
