@@ -122,6 +122,7 @@ public class Shop {
 		}
 		if (!exist) {
 			this.products.add(product);
+			System.out.print("The item has been added successfully");
 		}
 	}
 

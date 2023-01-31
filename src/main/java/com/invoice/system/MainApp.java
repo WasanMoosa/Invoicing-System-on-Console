@@ -1,17 +1,13 @@
 package com.invoice.system;
 
-import java.awt.Checkbox;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Spliterator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -69,6 +65,17 @@ public class MainApp {
 							secondChoice = Integer.parseInt(userInput.nextLine());
 							switch (secondChoice) {
 							case 1:
+								System.out.println("The items you have in your store are");
+								try {
+									groceryShop.setProducts(loadProductFile(groceryShop));
+									System.out.println("ID         Name");
+									System.out.println("-------------------");
+									for (Product ii : groceryShop.getProducts()) {
+										System.out.println(ii.getId() + "        " + ii.getName());
+									}
+								} catch (Exception e) {
+									System.out.println("The file is empty!");
+								}
 
 								break;
 
@@ -136,50 +143,106 @@ public class MainApp {
 						try {
 							secondChoice = Integer.parseInt(userInput.nextLine());
 							switch (secondChoice) {
+
+							// Adding items
 							case 1:
 								try {
 									groceryShop.setProducts(loadProductFile(groceryShop));
 								} catch (Exception e) {
 									// TODO: handle exception
 								}
+								boolean currectDetails = false;
+								while (!currectDetails) {
+									try {
+										System.out.println("Enter the item details that you want to add");
+										System.out.print("Item id:");
+										int itemId = Integer.parseInt(userInput.nextLine());
+										System.out.print("Item name:");
+										String itemName = userInput.nextLine();
+										System.out.print("Item price:");
+										Double itemPrice = Double.parseDouble(userInput.nextLine());
+										Product product = new Product(itemId, itemName, itemPrice);
+										groceryShop.addProduct(product);
+										putInFile2(groceryShop.getProducts());
+										currectDetails = true;
 
-								System.out.println("Enter the item details that you want to add");
-								System.out.print("Item id:");
-								int itemId = Integer.parseInt(userInput.nextLine());
-								System.out.print("Item name:");
-								String itemName = userInput.nextLine();
-								System.out.print("Item price:");
-								Double itemPrice = userInput.nextDouble();
-
-								Product product = new Product(itemId, itemName, itemPrice);
-								groceryShop.addProduct(product);
-								putInFile2(groceryShop.getProducts());
-								break;
-
-							case 2:
-								groceryShop.setProducts(loadProductFile(groceryShop));
-								System.out.println("The items you have are:");
-								for (Product ii : groceryShop.getProducts()) {
-									System.out.println(ii.getId() + " " + ii.getName());
+									} catch (Exception e) {
+										System.out.println("Be carefull, Here is example how you can write");
+										System.out.println("id should be integer number");
+										System.out.println("Name can be anything you like");
+										System.out.println("Price has to be number\n");
+									}
 								}
-								Boolean checkBoolean = false;
-								while (!checkBoolean) {
+								break;
+							// deleting item
+							case 2:
+								try {
+									groceryShop.setProducts(loadProductFile(groceryShop));
+								} catch (Exception e) {
+									// TODO: handle exception
+								}
+								System.out.println("The items you have are:");
+								System.out.println("ID         Name");
+								System.out.println("-------------------");
+								for (Product ii : groceryShop.getProducts()) {
+									System.out.println(ii.getId() + "        " + ii.getName());
+								}
+								Boolean checkCorrectID = false;
+								while (!checkCorrectID) {
 									try {
 										System.out.println("Choose what you want to delet by writing id");
 										int id = Integer.parseInt(userInput.nextLine());
-										checkBoolean = groceryShop.deleteProduct(id, checkBoolean);
+										checkCorrectID = groceryShop.deleteProduct(id, checkCorrectID);
 										putInFile2(groceryShop.getProducts());
 
 									} catch (Exception e) {
 										System.out.println("Invalid id");
-										checkBoolean = false;
+										checkCorrectID = false;
 									}
 
 								}
 
 								break;
 
+							// change item price
 							case 3:
+								try {
+									groceryShop.setProducts(loadProductFile(groceryShop));
+								} catch (Exception e) {
+									// TODO: handle exception
+								}
+								System.out.println("The items you have are:");
+								System.out.println("ID         Name");
+								System.out.println("-------------------");
+								for (Product ii : groceryShop.getProducts()) {
+									System.out.println(ii.getId() + "        " + ii.getName());
+								}
+								checkCorrectID = false;
+								while (!checkCorrectID) {
+									try {
+										System.out.println("Choose the item you want to change its price by writing the id");
+										int id = Integer.parseInt(userInput.nextLine());
+
+										for ( int i=0; i< groceryShop.getProducts().size(); i++) {
+											if (groceryShop.getProducts().get(i).getId()== id) {
+												System.out.println("The previous price is " + groceryShop.getProducts().get(i).getPrice());
+												System.out.println("Enter the new price: ");
+												Double itemPrice = Double.parseDouble(userInput.nextLine());
+												groceryShop.getProducts().get(i).setPrice(itemPrice);
+												checkCorrectID = true;
+											}
+										}		
+										putInFile2(groceryShop.getProducts());
+										if (!checkCorrectID) {
+										System.out.println("id not exist");}
+
+									} catch (NumberFormatException e) {
+										System.out.println("Invalid id or price");
+										checkCorrectID = false;
+									}
+
+
+								}
 
 								break;
 							case 4:
