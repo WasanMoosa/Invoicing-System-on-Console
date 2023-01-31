@@ -401,7 +401,12 @@ public class MainApp {
 		}
 
 	}
-
+	
+/**
+ * 
+ * @param shop File to be update it
+ * @return ArrayList 
+ */
 	public static ArrayList<Product> loadProductFile(Shop shop) {
 		File myFile = new File("product.json");
 		ArrayList<Product> list = new ArrayList<>();
