@@ -296,8 +296,19 @@ public class MainApp {
 					break;
 				case 8:
 					// Perform action for exit
-					System.out.println("See you Soon!");
-
+					String changeName = " ";
+					while (!changeName.equals("y") && !changeName.equals("Y") && !changeName.equals("n")
+							&& !changeName.equals("N")) {
+						System.out.println("Are you sure you want to exit? If yes press y, if No press n");
+						changeName = userInput.nextLine();
+						if (changeName.equals("y") || changeName.equals("Y")) {
+							System.out.println("See you soon!");
+						} else if (changeName.equals("n") || changeName.equals("N")) {
+							choice = 0;
+							TopLevelMenu.main(args);
+						}
+					}
+					break;
 				}
 			} catch (Exception e) {
 				System.out.println("Invalid input. Please choose a number.");
