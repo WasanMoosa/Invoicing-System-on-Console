@@ -387,7 +387,10 @@ public class MainApp {
 			}
 		}
 	}
-
+/**
+ * put in file shop details hashmap 
+ * @param FileUpload
+ */
 	public static void putInFileShoDetail(HashMap<String, String> FileUpload) {
 		File myFile = new File("shop details.json");
 		try (FileWriter writer = new FileWriter(myFile)) {
@@ -401,7 +404,10 @@ public class MainApp {
 			// TODO: handle exception
 		}
 	}
-
+/**
+ * put program details of number of clicks in file
+ * @param FileUpload
+ */
 	public static void putInFileProgDetail(HashMap<String, Integer> FileUpload) {
 		File myFile = new File("program details.json");
 		try (FileWriter writer = new FileWriter(myFile)) {
@@ -416,6 +422,10 @@ public class MainApp {
 		}
 
 	}
+	/**
+	 * To put products in file
+	 * @param fileUpload
+	 */
 
 	public static void putInFileProduct(ArrayList<Product> fileUpload) {
 		File myFile = new File("product.json");
@@ -437,7 +447,7 @@ public class MainApp {
 	/**
 	 * 
 	 * @param shop File to be update it
-	 * @return ArrayList
+	 * @return ArrayList of product
 	 */
 	public static ArrayList<Product> loadProductFile(Shop shop) {
 		File myFile = new File("product.json");
@@ -471,6 +481,11 @@ public class MainApp {
 		return list;
 
 	}
+	/**
+	 * 
+	 * @param fileName
+	 * @return Hash map of program details that show the number of clicks
+	 */
 
 	public static HashMap<String, Integer> loadProgDetails(String fileName) {
 		File myFile = new File(fileName);
@@ -510,7 +525,11 @@ public class MainApp {
 		return numberOfClick;
 
 	}
-
+/**
+ * 
+ * @param fileName
+ * @return HashMap of shopDetails
+ */
 	public static HashMap<String, String> loadShopDetails(String fileName) {
 		File myFile = new File(fileName);
 		HashMap<String, String> shopDetails = new HashMap<>();
